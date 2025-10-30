@@ -30,12 +30,13 @@ Simple benchmarking setup for testing LLM inference performance using `llama-ben
 
 ### Option 2: Manual with Hugging Face CLI + llama-bench
 
-```bash./run_llama_bench.sh- **t/s** (tokens per second) for **prefill** and **decode** phases
+```bash./run_llama_bench.sh
+
+
 
 # Download model
 
-huggingface-cli download --local-dir ./models deepseek-ai/DeepSeek-R1-Distill-Qwen-7B-GGUF DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf```- Effect of **context length**, **batch size**, **GPU vs CPU** backends
-
+huggingface-cli download --local-dir ./models deepseek-ai/DeepSeek-R1-Distill-Qwen-7B-GGUF DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf```
 
 
 # Run benchmark- Impact of **quantization** (e.g., Q4_K_M, Q5_K_M, Q8_0, FP16)
