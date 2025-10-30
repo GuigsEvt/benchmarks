@@ -1,103 +1,86 @@
-# LLM Benchmark with llama-bench# LLM Benchmark with llama-bench# LLM Benchmark with llama-bench
-
-
+# LLM Benchmark with llama-bench
 
 Simple benchmarking setup for testing LLM inference performance using `llama-bench`.
 
-
-
-## PrerequisitesSimple benchmarking setup for testing LLM inference performance using `llama-bench`.Simple benchmarking setup for testing LLM inference performance using `llama-bench`.
-
-
+## Prerequisites
 
 - **llama-bench**: Install from [llama.cpp](https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md)
 
-
-
-## Examples## Quick Start---
-
-
+## Quick Start
 
 ### Option 1: Use the automated script
 
 ```bash
-
-./run_llama_bench.sh### Option 1: Use the automated script## ✅ What this measures
-
+./run_llama_bench.sh
 ```
-
-```bash
 
 ### Option 2: Manual with Hugging Face CLI + llama-bench
 
-```bash./run_llama_bench.sh
-
-
+```bash
+# Install huggingface_hub first
+pip install -U huggingface_hub
 
 # Download model
+huggingface-cli download --local-dir ./models deepseek-ai/DeepSeek-R1-Distill-Qwen-7B-GGUF DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf
 
-huggingface-cli download --local-dir ./models deepseek-ai/DeepSeek-R1-Distill-Qwen-7B-GGUF DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf```
-
-
-# Run benchmark- Impact of **quantization** (e.g., Q4_K_M, Q5_K_M, Q8_0, FP16)
-
+# Run benchmark
 llama-bench --model ./models/DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf
+```
 
-```This script will:- Threading (`--threads`), GPU layers (`--ngl`), and KV cache type
+This script will:
+- Download the model from Hugging Face if it doesn't exist
+
+## ✅ What this measures
+
+- Impact of **quantization** (e.g., Q4_K_M, Q5_K_M, Q8_0, FP16)
+- Threading (`--threads`), GPU layers (`--ngl`), and KV cache type
+
+## Model
 
 
 
-## Model- Download the model from Hugging Face if it doesn't exist
-
-
-
-Currently configured for:- Run llama-bench with the model`llama-bench` runs a synthetic prompt; use `main` for end‑to‑end chat latency if needed.
+Currently configured for:
 
 - **Model**: DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf
-
 - **Source**: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B-GGUF
 
-### Option 2: Manual command---
+`llama-bench` runs a synthetic prompt; use `main` for end‑to‑end chat latency if needed.
 
-```bash
+---
 
-llama-bench --model ./models/DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf## 📦 Prerequisites
-
-```
+## 📦 Prerequisites
 
 ### macOS (Apple Silicon)
 
-## Model- Xcode Command Line Tools
-
+- Xcode Command Line Tools
 - CMake ≥ 3.24
+- Python 3 (optional for helper scripts)
+- **Metal** backend is built in by default
+- llama-bench [https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md]
 
-Currently configured for:- Python 3 (optional for helper scripts)
-
-- **Model**: DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf- **Metal** backend is built in by default
-
-- **Source**: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B-GGUF- llama-bench [https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md]
-
-
-
-## Directory Structure---
+## Directory Structure
 
 ```
-
-llm/## 📥 Get a model
-
+llm/
 ├── models/
-
-│   └── DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.ggufYou need a **GGUF** model file. Example (DeepSeek‑R1‑Distill‑Qwen‑7B in Q4_K_M):
-
+│   └── DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf
 ├── run_llama_bench.sh
-
-└── README_llama_bench.md```bash
-
-```# With Hugging Face CLI (optional; or download manually)
-pipx install huggingface_hub || pip install --user huggingface_hub
-huggingface-cli download --local-dir ./models   lmstudio-community/DeepSeek-R1-Distill-Qwen-7B-GGUF   DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf
+└── README_llama_bench.md
 ```
-huggingface-cli download --local-dir ./models   lmstudio-community/DeepSeek-R1-Distill-Qwen-7B-GGUF   DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf
+
+---
+
+## � Get a model
+
+You need a **GGUF** model file. Example (DeepSeek‑R1‑Distill‑Qwen‑7B in Q4_K_M):
+
+```bash
+# Install huggingface_hub first
+pip install -U huggingface_hub
+
+# With Hugging Face CLI (or download manually)
+huggingface-cli download --local-dir ./models lmstudio-community/DeepSeek-R1-Distill-Qwen-7B-GGUF DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf
+```
 
 Directory structure:
 ```
@@ -112,7 +95,7 @@ benchmarks/
 
 ---
 
-## 🚀 Quick start (macOS / Metal)
+## �🚀 Quick start (macOS / Metal)
 
 ```bash
 MODEL=./models/DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf
